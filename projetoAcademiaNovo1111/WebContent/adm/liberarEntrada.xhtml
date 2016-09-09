@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+       <ui:composition template="layout.xhtml">
+	    <ui:define name="conteudo">	
+		 <h:form id="form4">
+			  <p:panelGrid columns="2">
+				
+				<h:outputLabel value="Matricula Cliente" />
+				<p:inputText value="#{mb.matCliente}">
+					<f:ajax render="tbl1" listener="#{mb.buscarPorMatricula}" event="keyup"/>
+				</p:inputText>
+			
+			  </p:panelGrid> 
+			   
+			   
+				<p:dataTable id="tbl1" value="#{mb.listCliente}" var="linha" reflow="true" rows="8" paginator="true" 
+				paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {JumpToPageDropdown} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="[ Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages} ]">
+											
+				<p:column width="100" headerText="Matricula">
+					<h:outputText value="#{linha.matCliente}"/>
+				</p:column>
+				
+				<p:column width="140" headerText="Foto">
+					<p:graphicImage value="/img/#{linha.imagem}" width="130" height="130"/>
+				</p:column>				
+				
+				<p:column headerText="Nome">
+					<h:outputText value="#{linha.nome}" />
+				</p:column>
+							
+				
+				<p:column width="120" headerText="Liberacao">
+					<center>
+					<p:commandButton  style="color:white" icon="fa fa-check-square-o" action="#{mb.entrada}" ajax="true" update=":form4">
+						<f:setPropertyActionListener value="#{linha}" target="#{mb.cliente}"/>
+					</p:commandButton>
+				    </center>
+				 </p:column>
+			
+			
+			</p:dataTable>
+		   <p:growl/>	
+		  </h:form>
+         </ui:define>
+        </ui:composition>
+       </html>

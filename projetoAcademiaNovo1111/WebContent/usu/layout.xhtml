@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+</h:head>
+
+<h:body>
+
+
+<!-- Para criar subareas com conteudos diferentes dentro da mesma pagina -->
+	   <p:layout fullPage="true">
+		 
+		 <p:layoutUnit position="north" size="70">
+		 	<!-- <p:panel header="Usuario: #{mbUsu.usuarioLogado.login}" style="border-style:none !important" />-->
+		 	<center>
+		 	<p:graphicImage value="/img/logoacademia2.jpg" width="750" height="50"></p:graphicImage>
+		 	</center>	
+		 </p:layoutUnit>
+		 
+		 <p:layoutUnit position="west" size="250" resizable="true" minSize="150"	maxSize="300">
+		   <p:submenu>
+		     <h:form id="formLogout">
+		      <p:commandButton value="Logout" action="#{mbUsu.logout}" update="/loginForm" ajax="false"  />
+		     </h:form>
+		   </p:submenu>
+			<br/>
+			<ui:include src="menu.xhtml"/>	
+		</p:layoutUnit>
+		
+		
+		
+		<p:layoutUnit position="center">
+		<!-- essa area sera modificada em cada pagina.. -->
+			<ui:insert name="conteudo"/>
+		</p:layoutUnit>
+	
+	   <!-- 
+		  <p:layoutUnit position="south" size="60">
+		
+		 </p:layoutUnit>
+		 -->
+	
+	</p:layout>
+</h:body>
+</html>

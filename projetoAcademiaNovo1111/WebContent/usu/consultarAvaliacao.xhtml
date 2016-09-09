@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+       <ui:composition template="layout.xhtml">
+	    <ui:define name="conteudo">	
+		  <h:form id="form10">
+			<p:panelGrid columns="2">
+				<h:outputLabel value="Nome Cliente" />
+				<p:inputText value="#{mb.nome}">
+					<f:ajax render="tbl1" listener="#{mb.buscarPorNome}" event="keyup" />
+				</p:inputText>
+			</p:panelGrid>
+
+
+			<p:dataTable id="tbl1" value="#{mb.listCliente}" var="linha" reflow="true" rows="8" paginator="true" 
+				paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {JumpToPageDropdown} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="[ Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages} ]">
+
+				<p:column width="60" headerText="Matricula">
+					<h:outputText value="#{linha.matCliente}" readonly="true" />
+				</p:column>
+
+				<p:column width="80" headerText="Foto">
+					<p:graphicImage value="/img/#{linha.imagem}" width="120" height="120"/>
+				</p:column>
+
+				<p:column width="160" headerText="Nome">
+					<h:outputText value="#{linha.nome}" />
+				</p:column>
+
+				<p:column width="40" headerText="Aluno Ativo">
+					<h:outputText value="#{linha.ativo}" />
+				</p:column>
+
+				<p:column  width="110" headerText="Data Avaliacao">
+					<h:outputText value="#{linha.dataAvaliacao}">
+					<f:convertDateTime pattern="dd/MM/yy HH:mm:ss" locale="pt_BR" timeZone="GMT-3"/>
+					</h:outputText>
+				</p:column>
+
+
+				<p:column width="80" headerText="Atualizar Data">
+					<center>
+					<p:commandButton style="color:white" icon="fa fa-edit" onclick="PF('updateAva').show()" ajax="true" update=":remarcar">
+						<f:setPropertyActionListener value="#{linha}" target="#{mb.cliente}"/>
+					</p:commandButton>
+				   </center>
+				   </p:column>				
+			     </p:dataTable>
+		        <p:growl/>
+		       </h:form>
+
+			 <p:dialog id="updateAva" modal="true" appendTo="@(body)" widgetVar="updateAva" showEffect="fade" header="Atualizar Data">
+		     <h:form id="remarcar">
+			   <p:panelGrid columns="2">
+			
+			     <p:outputLabel for="datetime" value="Data e Hora:"/>
+                   <p:calendar id="datetime" value="#{mb.cliente.dataAvaliacao}" pattern="dd/MM/yyyy HH:mm:ss">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" locale="pt_BR" timeZone="GMT-3"/>
+                   </p:calendar>
+                  
+			<p:commandButton value="Efetuar Agendamento" actionListener="#{mb.agendAvaliacao}" update=":form9" ajax="false" onclick="PF('agendAva').hide()" />	
+				
+		         </p:panelGrid>
+		          <p:growl/>
+		        </h:form>
+		       </p:dialog>
+             </ui:define>
+           </ui:composition>
+        </html>

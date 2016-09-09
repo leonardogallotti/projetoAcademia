@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+       <ui:composition template="layout.xhtml">
+	     <ui:define name="conteudo">
+		  <h:form id="form8">
+		   <p:growl for="form8"/>
+							      				
+      			<p:dataTable id="tbl1" value="#{mb.listCliente}" var="linha" reflow="true" rows="8" paginator="true">
+				
+				<p:column>
+				   <f:facet name="header">
+				    	<h:outputText value="Matricula"/>
+				    </f:facet>
+				   <h:outputText value="#{linha.matCliente}"/>
+				</p:column>
+
+				<p:column>
+				   <f:facet name="header">
+				    	<h:outputText value="Nome"/>
+				    </f:facet>
+				   <h:outputText value="#{linha.nome}"/>
+				</p:column>
+				
+				<p:column>
+				   <f:facet name="header">
+				    	<h:outputText value="Ativo"/>
+				    </f:facet>
+				   <h:outputText value="#{linha.ativo}"/>
+				</p:column>
+
+				<p:column>
+				   <f:facet name="header">
+				    	<h:outputText value="Telefone"/>
+				    </f:facet>
+				   <h:outputText value="#{linha.telefone}"/>
+				</p:column>
+
+			    <p:column>
+				   <f:facet name="header">
+				    	<h:outputText value="Pacote"/>
+				    </f:facet>
+				   <h:outputText value="#{linha.pacote.idPacote}"/>
+				</p:column>
+			    
+				<p:column>
+				   <f:facet name="header">
+				    	<h:outputText value="Valor"/>
+				    </f:facet>
+				   <h:outputText value="#{linha.pacote.valorPacote}">
+				    <f:convertNumber  type="currency"/>
+				   </h:outputText>
+				</p:column>
+					 
+      		 </p:dataTable>	
+      		     	
+      		     			
+      				<h3>Exportar Dados</h3>
+					<h:commandLink>
+        				<p:graphicImage value="/img/excel.png" width="40" height="40" />
+        				<p:dataExporter type="xls" target="tbl1" fileName="Alunos da Academia"/>
+    				</h:commandLink>
+      			 
+      		</h:form>
+           </ui:define>
+          </ui:composition>
+         </html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<ui:fragment>
+
+	<h:form id="formMenu">
+		
+		<p:menu>
+			<p:submenu label="Administrador" >
+				<p:menuitem value="Cadastrar Aluno"      outcome="cadastrarAluno"/>
+				<p:menuitem value="Consultar Aluno"      outcome="consultarAluno"/>
+				<p:menuitem value="Agendar Avaliacao"    outcome="agendarAvaliacao"/>
+				<p:menuitem value="Consultar AvaLiacao"  outcome="consultarAvaliacao"/>
+				<p:menuitem value="Pagamento"            outcome="pagamento"/>
+				<p:menuitem value="Liberar Entrada"      outcome="liberarEntrada"/>
+				<p:menuitem value="Consultar Pacote"     outcome="consultarPacote"/>
+				<p:menuitem value="Criar Pacote"         outcome="criarPacote"/>
+			</p:submenu>	   
+		   </p:menu>
+	          <br/>
+		     <h:form id="formLogout">
+		      <p:commandButton value="Logout" style="width: 200px" action="#{mbUsu.logout}" update="/loginForm" ajax="false"  />
+		     </h:form>
+	      </h:form>
+         </ui:fragment>
+        </html>

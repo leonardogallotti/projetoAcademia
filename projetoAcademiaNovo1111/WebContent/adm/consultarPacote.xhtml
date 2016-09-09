@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+       <ui:composition template="layout.xhtml">
+	    <ui:define name="conteudo">	
+
+		  <p:dialog id="editarPacote" modal="true" appendTo="@(body)" widgetVar="editarPacote" showEffect="fade" header="Editar Pacote">
+		   <h:form id="pacForm">
+			<p:growl for="pacForm"/>
+			 <p:panelGrid columns="2">
+							
+				<h:outputLabel for="editarDescPacote" value="Descricao Pacote"/>
+				<p:inputText id="editarDescPacote" value="#{mbPac.pacote.descPacote}"/>
+			
+				<h:outputLabel for="editarValor" value="Valor"/>
+				<p:inputText id="editarValor" value="#{mbPac.pacote.valorPacote}" required="true"/>
+												
+				<p:commandButton value="Confirmar Alteração" action="#{mbPac.editar}" ajax="false" update=":form6" onclick="PF('editarPacote').hide()"/>
+			
+			 </p:panelGrid>
+		    </h:form>	
+	       </p:dialog>
+
+		   <h:form id="form6">
+			 <p:growl for="form6"/>
+			  <p:panelGrid columns="2">
+				
+				<h:outputLabel value="Nome do Pacote" />
+				<p:inputText value="#{mbPac.descPacote}">
+					<f:ajax render="tbl1" listener="#{mbPac.buscarPacote}" event="keyup" />
+				</p:inputText>
+			  </p:panelGrid>	
+				
+				<p:dataTable id="tbl1" value="#{mbPac.listPacote}" var="linha" reflow="true" rows="8" paginator="true" 
+				paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {JumpToPageDropdown} {NextPageLink} {LastPageLink}"
+				currentPageReportTemplate="[ Exibindo de {startRecord} a {endRecord} no total de {totalRecords} - Página: {currentPage}/{totalPages} ]">
+
+				<p:column width="110" headerText="Numero Pacote">
+					<h:outputText value="#{linha.idPacote}" readonly="true" />
+				</p:column>
+
+				<p:column headerText="Descricao">
+					<h:outputText value="#{linha.descPacote}"/>
+				</p:column>
+				
+				<p:column headerText="Valor">
+					<h:outputText value="#{linha.valorPacote}" readonly="true">
+					 <f:convertNumber  type="currency"/>
+					 </h:outputText>
+				</p:column>
+
+				<p:column width="60" headerText="Editar">
+				  <p:commandButton style="color:white" icon="fa fa-edit" onclick="PF('editarPacote').show()" ajax="true" update=":pacForm">
+						<f:setPropertyActionListener value="#{linha}" target="#{mbPac.pacote}"/>
+				  </p:commandButton>
+				</p:column>
+
+				<p:column width="60" headerText="Excluir">
+					<p:commandButton style="color:white" icon="fa fa-trash" action="#{mbPac.excluir}" update=":form6">
+						<f:setPropertyActionListener value="#{linha}" target="#{mbPac.pacote}"/>
+						<p:confirm icon="ui-icon-alert" message="Deseja Excluir?" header="confirma?"/>
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog showEffect="fade" hideEffect="clip" global="true"
+				rendered="true">
+				<p:commandButton type="button" value="sim"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton type="button" value="nao"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		  </h:form>
+        </ui:define>
+      </ui:composition>
+     </html>

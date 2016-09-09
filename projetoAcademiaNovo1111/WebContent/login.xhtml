@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+	<h:head>
+		<style>
+			body{
+				background-attachment: fixed;
+				background-image: url('img/academia5.jpg'); 
+				background-repeat:no-repeat;
+				background-size:100% 100%;"
+			}
+		#painelLogin{
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		margin: auto
+		}
+		
+		
+		
+		</style>
+	</h:head>
+	<h:body>
+		<p:panel header="Área de Login" style="width:280px; height:160px;"  id="painelLogin">
+			<h:form id="loginForm">
+				<p:panelGrid columns="2"  cellpadding="5">
+					
+				   	
+					<p:outputLabel  value="Login"/>
+					<p:inputText value="#{mbUsu.usuario.login}" required="true" placeholder="Entre com Login"/>			   			 
+				   
+				  	
+					<p:outputLabel   value="Senha"/>
+					<p:password value="#{mbUsu.usuario.senha}" required="true" placeholder="Entre com Senha"/>				  			
+				   
+				   
+					<p:commandButton  value="Logar" action="#{mbUsu.logar}" update=":loginForm" ajax="false"/>
+				   
+				</p:panelGrid>
+				<p:growl for="loginForm"/>
+			</h:form>
+		</p:panel>
+	</h:body>
+</html>

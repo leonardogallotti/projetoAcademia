@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	
+       <ui:composition template="layout.xhtml">
+	    <ui:define name="conteudo">	
+		 <h:form id="form7">
+    	  <p:growl for="form7"/>
+    	   <p:panelGrid columns="2">
+				
+				<h:outputLabel value="Descricao do Pacote" for="Descricao do Pacote" />
+				<h:inputText value="#{mbPac.pacote.descPacote}" required="true" size="30" />
+		
+				<h:outputLabel value="Valor do Pacote" for="Valor do Pacote"/>
+				<h:inputText value="#{mbPac.pacote.valorPacote}" required="true" size="6"/>
+								
+				<p:commandButton  style="color:white" icon="fa fa-floppy-o" value="Gravar" action="#{mbPac.criar}" ajax="true" update=":form7"/>
+		   </p:panelGrid>
+		  </h:form>
+         </ui:define>
+        </ui:composition>
+       </html>
+     
